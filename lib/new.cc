@@ -369,6 +369,7 @@ NAN_METHOD(WrappedRE2::New)
 	re2::RE2::Options options;
 	options.set_case_sensitive(!ignoreCase);
 	options.set_one_line(!multiline);
+	options.set_max_mem(64<<20);  // <<20 = * 1mb
 	options.set_log_errors(false); // inappropriate when embedding
 
 	std::unique_ptr<WrappedRE2> re2(new WrappedRE2(re2::StringPiece(data, size), options, source, global, ignoreCase, multiline, sticky));
