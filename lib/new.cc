@@ -190,9 +190,9 @@ NAN_METHOD(WrappedRE2::New) {
 	RE2::Options options;
 	options.set_case_sensitive(!ignoreCase);
 	options.set_one_line(!multiline);
+	options.set_max_mem(64<<20);  // <<20 = * 1mb
 
 	// create and return an object
-
 	WrappedRE2* re2 = new WrappedRE2(StringPiece(data, size), options, global, ignoreCase, multiline);
 	re2->Wrap(info.This());
 	info.GetReturnValue().Set(info.This());
